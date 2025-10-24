@@ -1,0 +1,22 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+.country, .temple, .beach {
+  background: white;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}

@@ -1,0 +1,38 @@
+:root { --ink:#0e1b2b; --muted:#5b6c84; --surface:#ffffff; --line:#e4e8f0; --bg:#f6f8fb; --primary:#2a6df4; }
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: var(--ink); background: var(--bg); }
+
+.navbar {
+  position: sticky; top:0; z-index:10;
+  display:flex; justify-content:space-between; align-items:center;
+  padding:.75rem 1rem; background:#0a1428; color:#fff;
+}
+.brand { display:flex; align-items:center; gap:.5rem; font-weight:700; }
+.brand__logo { width:32px; height:32px; border-radius:8px; background:#ffd166; display:inline-block; }
+.navlinks { display:flex; gap:.75rem; }
+.navlinks a { color:#fff; text-decoration:none; padding:.4rem .6rem; border-radius:.4rem; }
+.navlinks a:hover { background:rgba(255,255,255,.12); }
+.navlinks a.active { background:rgba(255,255,255,.2); }
+
+.wrap { min-height: calc(100dvh - 56px - 58px); display:grid; place-items:center; padding:1rem; }
+.panel {
+  width: min(720px, 92vw);
+  background: var(--surface); border: 1px solid var(--line); border-radius: .9rem;
+  padding: 1.25rem;
+}
+h1 { margin: 0 0 .25rem; }
+.muted { color: var(--muted); margin: 0 0 1rem; }
+
+.form { display:grid; gap: .85rem; }
+.form label { display:grid; gap:.35rem; font-weight:600; }
+.form input, .form textarea {
+  width: 100%; padding: .65rem .8rem; border:1px solid var(--line); border-radius:.6rem; font: inherit;
+}
+.btn {
+  cursor:pointer; padding:.7rem 1rem; border-radius:.6rem; border:1px solid var(--primary);
+  background: var(--primary); color: #fff; font-weight: 700;
+}
+.btn:active { transform: translateY(1px); }
+
+footer { text-align:center; padding:1.25rem; color:var(--muted); background:#f1f4f9; }

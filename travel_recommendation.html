@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Travel Recommendation</title>
+  <style>
+    /* ====== Base / Reset ====== */
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; color: #0e1b2b; }
+
+    /* ====== Navbar (Home only tem busca) ====== */
+    .navbar {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; gap: 1rem; align-items: center; justify-content: space-between;
+      padding: 0.75rem 1rem; background: rgba(4, 34, 95, 1); backdrop-filter: blur(6px);
+      color: #fff;
+    }
+    .brand { display: flex; align-items: center; gap: .5rem; font-weight: 700; letter-spacing: .5px; }
+    .brand__logo { width: 32px; height: 32px; border-radius: 8px; background: #ffd166; display: inline-block; }
+    .navlinks { display: flex; gap: .75rem; align-items: center; }
+    .navlinks a { color: #fff; text-decoration: none; padding: .4rem .6rem; border-radius: .4rem; }
+    .navlinks a:hover { background: rgba(255,255,255,.12); }
+
+    .searchbar { display: flex; align-items: center; gap: .5rem; }
+    .searchbar input {
+      width: min(48vw, 360px);
+      padding: .55rem .75rem; border: 1px solid #d0d7e2; border-radius: .5rem;
+    }
+    .btn {
+      cursor: pointer; padding: .55rem .9rem; border-radius: .5rem;
+      border: 1px solid #d0d7e2; background: #ffffff; color: #0e1b2b; font-weight: 600;
+    }
+    .btn--primary { background: #2a6df4; color: #fff; border-color: #2a6df4; }
+    .btn:active { transform: translateY(1px); }
+
+    /* ====== Hero / Landing ====== */
+    .hero {
+      position: relative; min-height: 78vh; display: grid; place-items: center;
+      background: url("https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=1600&auto=format&fit=crop") center/cover no-repeat;
+      color: #fff; text-align: center; padding: 3rem 1rem;
+    }
+    .hero__overlay { position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.35)); }
+    .hero__content { position: relative; z-index: 1; max-width: 900px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3.25rem); margin: 0 0 .5rem; }
+    .hero p { font-size: clamp(1rem, 2.5vw, 1.25rem); opacity: .95; }
+    .cta { margin-top: 1.25rem; display: inline-flex; gap: .75rem; align-items: center; }
+    .cta .btn { font-size: 1rem; padding: .7rem 1rem; }
+
+    /* ====== Socials ====== */
+    .socials { margin-top: 1.25rem; display: flex; justify-content: center; gap: .75rem; }
+    .socials a { color: #fff; text-decoration: none; padding: .35rem .6rem; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; font-size: .9rem; }
+    .socials a:hover { background: rgba(255,255,255,.15); }
+
+    /* ====== Results ====== */
+    .results-wrap { padding: 2rem 1rem 3rem; background: #f6f8fb; }
+    .results-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; max-width: 1100px; margin: 0 auto 1rem; }
+    .results-head h2 { margin: 0; font-size: 1.35rem; }
+    #country-time { font-size: .95rem; color: #405068; }
+
+    .results-grid {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+    .card {
+      background: #fff; border: 1px solid #e4e8f0; border-radius: .8rem; overflow: hidden;
+      display: flex; flex-direction: column; box-shadow: 0 1px 2px rgba(0,0,0,.04);
+    }
+    .card img { width: 100%; height: 160px; object-fit: cover; }
+    .card__body { padding: .85rem 1rem 1rem; display: grid; gap: .35rem; }
+    .card__title { font-weight: 700; }
+    .muted { color: #5b6c84; font-size: .95rem; }
+
+    /* ====== Footer ====== */
+    footer { padding: 1.25rem; text-align: center; color: #5b6c84; background: #f1f4f9; font-size: .95rem; }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar" aria-label="Main">
+    <div class="brand">
+      <span class="brand__logo" aria-hidden="true"></span>
+      <span>Travel Recommendations!</span>
+    </div>
+    <div class="navlinks">
+      <a href="./travel_recommendation.html">Home</a>
+      <a href="./about_us.html">About Us</a>
+      <a href="./contact_us.html">Contact Us</a>
+    </div>
+    <form class="searchbar" role="search" onsubmit="return false;">
+      <label for="search-input" class="visually-hidden" style="position:absolute;left:-9999px;">Search</label>
+      <input id="search-input" type="text" placeholder="Try 'beaches', 'temples', 'Japan'..." />
+      <button id="btn-search" class="btn btn--primary" type="button">Search</button>
+      <button id="btn-clear" class="btn" type="button">Reset</button>
+    </form>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <h1>Explore. Dream. Discover.</h1>
+      <p>Find your next destination—beaches, temples, and vibrant cities around the world.</p>
+      <div class="cta">
+        <a class="btn btn--primary" href="#results">Book Now</a>
+        <a class="btn" href="./about_us.html">About Us</a>
+      </div>
+      <div class="socials" aria-label="Social media links">
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="X">X</a>
+        <a href="#" aria-label="YouTube">YouTube</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Results -->
+  <main id="results" class="results-wrap">
+    <div class="results-head">
+      <h2>Recommendations</h2>
+      <div id="country-time" aria-live="polite"></div>
+    </div>
+    <section id="results-grid" class="results-grid" aria-live="polite"></section>
+  </main>
+
+  <footer>© <span id="year"></span> Travel Recommendation</footer>
+
+  <script src="./travel_recommendation.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
